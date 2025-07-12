@@ -19,10 +19,14 @@ def get_files_info(working_directory, directory=None):
         return(f'Error: Cannot list "{directory}" as it is outside the permitted working directory')
 
     file_list = os.listdir(full_path)
-    file_new_list = []
 
-    for file in file_list:
-        file_path = os.path.join(full_path, file)
-        file_text = (f"- {file}: file_size={os.path.getsize(file_path)} bytes, is_dir={os.path.isdir(file_path)}")
-        file_new_list.append(file_text)
-    return "\n".join(file_new_list) 
+    try:
+        file_new_list = []
+
+        for file in file_list:
+            file_path = os.path.join(full_path, file)
+            file_text = (f"- {file}: file_size={os.path.getsize(file_path)} bytes, is_dir={os.path.isdir(file_path)}")
+            file_new_list.append(file_text)
+        return "\n".join(file_new_list)
+    except Exception as e:
+        return f"Error listing files: {e}"
