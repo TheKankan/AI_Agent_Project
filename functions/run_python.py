@@ -25,6 +25,9 @@ def run_python_file(working_directory, file_path, args=[]):
     abs_working_directory = os.path.abspath(working_directory)
     full_path = os.path.abspath(os.path.join(working_directory, file_path))
 
+    if isinstance(args, str):
+        args = [args]
+
     if not str(full_path).startswith(str(abs_working_directory)):
         return(f'Error: Cannot execute "{file_path}" as it is outside the permitted working directory')
 
